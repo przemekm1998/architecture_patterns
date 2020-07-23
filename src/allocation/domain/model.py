@@ -23,7 +23,7 @@ class Batch:
             self._allocations.add(line)
 
     def deallocate(self, line: OrderLine):
-        if line in self._allocations:
+        if self.has_allocation(line):
             self._allocations.remove(line)
 
     @property
@@ -33,6 +33,9 @@ class Batch:
     @property
     def available_quantity(self) -> int:
         return self._purchased_quantity - self.allocated_quantity
+
+    def has_allocation(self, line: OrderLine) -> bool:
+        return line in self._allocations
 
     def can_allocate(self, line: OrderLine) -> bool:
         return self.sku == line.sku and self.available_quantity >= line.qty
@@ -57,6 +60,10 @@ class OutOfStock(Exception):
     pass
 
 
+class NotAllocatedOrder(Exception):
+    pass
+
+
 def allocate(line: OrderLine, batches: List[Batch]) -> str:
     try:
         batch = next(
@@ -65,5 +72,17 @@ def allocate(line: OrderLine, batches: List[Batch]) -> str:
         batch.allocate(line)
     except StopIteration:
         raise OutOfStock(f'Out of stock for sku {line.sku}')
+
+    return batch.reference
+
+
+def deallocate(line: OrderLine, batches: List[Batch]) -> str:
+    try:
+        batch = next(
+            b for b in sorted(batches) if b.has_allocation(line)
+        )
+        batch.deallocate(line)
+    except StopIteration:
+        raise NotAllocatedOrder(f"Given order hasn't been allocated {line.order_id}")
 
     return batch.reference

@@ -2,7 +2,7 @@ import pytest
 
 from datetime import date, timedelta
 
-from model import Batch, OrderLine, allocate
+from src.allocation.domain.model import Batch, OrderLine, allocate, OutOfStock
 
 
 @pytest.fixture(scope='module')
@@ -56,9 +56,18 @@ def test_cannot_allocate_if_skus_do_not_match():
     assert batch.can_allocate(different_sku_line) is False
 
 
-def test_can_only_deallocate_allocated_lines(batch_and_line_factory):
+def test_deallocate_not_allocated_line_fail(batch_and_line_factory):
     batch, unallocated_line = batch_and_line_factory('DECORATIVE-TRINKET', 20, 2)
     batch.deallocate(unallocated_line)
+    assert batch.available_quantity == 20
+
+
+def test_deallocate_allocated_line(batch_and_line_factory):
+    batch, allocated_line = batch_and_line_factory('DECORATIVE-TRINKET', 20, 2)
+    batch.allocate(allocated_line)
+    assert batch.available_quantity == 18
+
+    batch.deallocate(allocated_line)
     assert batch.available_quantity == 20
 
 

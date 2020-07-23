@@ -1,4 +1,4 @@
-import model
+from src.allocation.domain import model
 
 
 def test_repository_can_save_batch(session):

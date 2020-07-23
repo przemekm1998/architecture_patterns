@@ -2,9 +2,9 @@ from sqlalchemy import (
     Table, MetaData, Column, Integer, String, Date,
     ForeignKey
 )
-import model
+from src.allocation.domain import model
 
-from sqlalchemy.orm import mapper, relationship
+from sqlalchemy.orm import mapper
 
 metadata = MetaData()
 

@@ -1,0 +1,15 @@
+{
+  "e2e/test_api.py::test_400_message_for_invalid_sku": true,
+  "e2e/test_api.py::test_400_message_for_out_of_stock": true,
+  "e2e/test_api.py::test_api_returns_201_andgithu_allocation": true,
+  "e2e/test_api.py::test_deallocate": true,
+  "test_model.py::test_prefers_earlier_batches": true,
+  "test_model.py::test_prefers_warehouse_batches_to_shipments": true,
+  "test_model.py::test_raises_out_of_stock_exception_if_cannot_allocate": true,
+  "test_orm.py::test_orderline_mapper_can_load_lines": true,
+  "test_orm.py::test_orderline_mapper_can_save_lines": true,
+  "test_repository.py::test_repository_can_retrieve_a_batch_with_allocations": true,
+  "test_repository.py::test_repository_can_save_batch": true,
+  "unit/test_model.py::test_prefers_earlier_batches": true,
+  "unit/test_model.py::test_prefers_warehouse_batches_to_shipments": true
+}
