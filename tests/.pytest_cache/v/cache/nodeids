@@ -37,5 +37,14 @@
   "unit/test_services.py::test_error_for_invalid_sku",
   "unit/test_services.py::test_commits",
   "unit/test_services.py::test_error_for_not_allocated_line",
-  "unit/test_services.py::test_deallocate_decrements_available_quantity"
+  "unit/test_services.py::test_deallocate_decrements_available_quantity",
+  "unit/test_services.py::test_add_batch",
+  "unit/test_services.py::test_allocate_returns_allocation",
+  "integration/test_uow.py::test_uow_can_retrieve_a_batch_and_allocate_to_it",
+  "integration/test_uow.py::test_rools_back_uncommitted_work_by_default",
+  "integration/test_uow.py::test_rolls_back_on_error",
+  "unit/test_services.py::test_add_batch_for_new_product",
+  "unit/test_services.py::test_add_batch_for_existing_product",
+  "unit/test_services.py::test_allocate_errors_for_invalid_sku",
+  "unit/test_services.py::test_allocate_commits"
 ]
